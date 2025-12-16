@@ -1,105 +1,128 @@
-<!-- Trailer Link -->
-<div class="trailer-link-container">
-  <a href="#" id="openTrailer" class="trailer-link">▶ TRAILER: Movie 1</a>
-</div>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Trailer Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Video Container im iOS-Glass-Frame -->
-<div class="video-frame" id="videoFrame">
-  <div class="iframe-container">
-    <iframe 
-      id="trailerIframe"
-      src=""
-      title="FNAF Movie Trailer"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  </div>
-</div>
+  <style>
+  /* Trailer Link */
+  .trailer-link-container {
+    margin-top: 40px;
+    text-align: center;
+  }
 
-<style>
-/* Trailer Link Style */
-.trailer-link-container {
-  margin-top: 20px;
-}
+  .trailer-link {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.25s ease;
+  }
 
-.trailer-link {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.25s ease;
-}
+  .trailer-link:hover {
+    opacity: 1;
+  }
 
-.trailer-link:hover {
-  opacity: 1;
-}
+  body {
+    background: #0f0f14;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* Video Glass Frame (iOS Style + Animation) */
-.video-frame {
-  margin-top: 24px;
-  width: 90%;
-  max-width: 800px;
-  aspect-ratio: 16/9;
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(36px) saturate(180%);
-  -webkit-backdrop-filter: blur(36px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.28);
-  box-shadow: 0 14px 48px rgba(0,0,0,0.45);
-  opacity: 0;
-  transform: translateY(30px) scale(0.94);
-  display: none;
-}
-
-/* Animation wird NUR nach Klick aktiviert */
-.video-frame.active {
-  display: block;
-  animation: videoAppear 1.8s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-@keyframes videoAppear {
-  0% {
+  /* Video Glass Frame (iOS Style + Animation) */
+  .video-frame {
+    margin-top: 24px;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(36px) saturate(180%);
+    -webkit-backdrop-filter: blur(36px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.28);
+    box-shadow: 0 14px 48px rgba(0,0,0,0.45);
     opacity: 0;
     transform: translateY(30px) scale(0.94);
+    display: none;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+
+  .video-frame.active {
+    display: block;
+    animation: videoAppear 1.8s cubic-bezier(.2,.8,.2,1) forwards;
   }
-}
 
-/* responsive iframe */
-.iframe-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.iframe-container iframe {
-  position: absolute;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-</style>
-
-<script>
-const trailerLink = document.getElementById("openTrailer");
-const videoFrame = document.getElementById("videoFrame");
-const trailerIframe = document.getElementById("trailerIframe");
-
-trailerLink.addEventListener("click", function(e) {
-  e.preventDefault();
-
-  if (!videoFrame.classList.contains("active")) {
-    trailerIframe.src = "https://www.youtube.com/embed/LZxJ6avGJls?rel=0&autoplay=1";
-    videoFrame.classList.add("active");
+  @keyframes videoAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.94);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
-});
-</script>
+
+  /* responsive iframe */
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- Trailer Link -->
+  <div class="trailer-link-container">
+    <a href="#" id="openTrailer" class="trailer-link">▶ TRAILER: Movie 1</a>
+  </div>
+
+  <!-- Video Container -->
+  <div class="video-frame" id="videoFrame">
+    <div class="iframe-container">
+      <iframe
+        id="trailerIframe"
+        src=""
+        title="FNAF Movie Trailer"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- SCRIPT AM ENDE (WICHTIG FÜR GITHUB PAGES) -->
+  <script>
+    const trailerLink = document.getElementById("openTrailer");
+    const videoFrame = document.getElementById("videoFrame");
+    const trailerIframe = document.getElementById("trailerIframe");
+
+    trailerLink.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      if (!videoFrame.classList.contains("active")) {
+        trailerIframe.src = "https://www.youtube.com/embed/LZxJ6avGJls?rel=0&autoplay=1";
+        videoFrame.classList.add("active");
+      }
+    });
+  </script>
+
+</body>
+</html>
