@@ -26,11 +26,11 @@
         100% {background-position:0% 50%;}
     }
 
-    .glass-frame {
+    .glass-frame, .trailer-frame {
         position: relative;
         width: 600px;
-        padding: 40px;
         border-radius: 30px;
+        padding: 40px;
         background: rgba(255,255,255,0.1);
         backdrop-filter: blur(20px) saturate(180%);
         box-shadow:0 8px 32px rgba(0,0,0,0.37);
@@ -40,8 +40,8 @@
     }
 
     @keyframes iosAppear {
-        0% {opacity:0; transform:translateY(-20px) scale(0.95);}
-        100% {opacity:1; transform:translateY(0) scale(1);}
+        0% {opacity:0; transform: translateY(-20px) scale(0.95);}
+        100% {opacity:1; transform: translateY(0) scale(1);}
     }
 
     .profile-images {
@@ -65,6 +65,7 @@
         font-size:22px;
         text-shadow:2px 2px 10px rgba(0,0,0,0.7);
         display:inline-block;
+        animation: iosTextBounce 1.2s ease forwards;
     }
 
     .fnaf-subtext {
@@ -75,23 +76,26 @@
         text-shadow:1px 1px 8px rgba(0,0,0,0.5);
     }
 
+    @keyframes iosTextBounce {
+        0% {transform: scale(0.8); opacity: 0;}
+        50% {transform: scale(1.1); opacity: 1;}
+        100% {transform: scale(1); opacity: 1;}
+    }
+
     .follow-mouse { transition: transform 0.2s ease; }
 
     .trailer-frame {
-        position: relative;
-        width: 600px;
-        border-radius: 30px;
-        overflow: hidden;
         background: url('https://i.postimg.cc/8ctZ38s8/Fnaf-1-film-machen.png') center/cover no-repeat,
                     url('https://i.postimg.cc/JzypT28y/fnaf.png') center/cover no-repeat;
         background-blend-mode: lighten;
         backdrop-filter: blur(10px);
-        border:1px solid rgba(255,255,255,0.2);
-        padding:30px;
-        box-shadow:0 8px 32px rgba(0,0,0,0.37);
-        text-align:center;
-        color:white;
-        font-family:'Press Start 2P',cursive;
+        padding: 30px;
+        animation: iosAppearTrailer 1.5s ease forwards;
+    }
+
+    @keyframes iosAppearTrailer {
+        0% {opacity:0; transform: translateY(20px) scale(0.9);}
+        100% {opacity:1; transform: translateY(0) scale(1);}
     }
 
     .trailer-frame h2 {
@@ -106,6 +110,7 @@
         border-radius:20px;
         border:none;
     }
+
 </style>
 </head>
 <body>
