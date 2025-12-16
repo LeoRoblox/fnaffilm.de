@@ -17,20 +17,12 @@
       --white: #f5f5f5;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       height: 100vh;
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont;
-      background: linear-gradient(120deg,
-        var(--red),
-        var(--brown),
-        var(--blue),
-        var(--yellow));
+      background: linear-gradient(120deg, var(--red), var(--brown), var(--blue), var(--yellow));
       background-size: 400% 400%;
       animation: gradientMove 18s ease infinite;
       overflow: hidden;
@@ -43,26 +35,36 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Background images */
     .bg-image {
       position: absolute;
       inset: 0;
       background-position: center;
       background-size: cover;
-      opacity: 0.12;
+      opacity: 0;
       filter: blur(2px) contrast(1.1);
+      animation: bgAppear 2.2s cubic-bezier(.2,.8,.2,1) forwards,
+                 bgFloat 20s ease-in-out infinite;
+      transform: scale(1.08);
     }
 
-    .bg1 {
-      background-image: url('https://i.postimg.cc/8ctZ38s8/Fnaf-1-film-machen.png');
+    @keyframes bgAppear {
+      0% { opacity: 0; transform: scale(1.15); }
+      100% { opacity: 0.12; transform: scale(1.08); }
     }
 
+    @keyframes bgFloat {
+      0% { transform: scale(1.08) translateY(0px); }
+      50% { transform: scale(1.1) translateY(-20px); }
+      100% { transform: scale(1.08) translateY(0px); }
+    }
+
+    .bg1 { background-image: url('https://i.postimg.cc/8ctZ38s8/Fnaf-1-film-machen.png'); }
     .bg2 {
       background-image: url('https://i.postimg.cc/JzypT28y/fnaf.png');
       mix-blend-mode: overlay;
+      animation-delay: 0.4s;
     }
 
-    /* Center container */
     .stage {
       position: relative;
       width: 100%;
@@ -73,42 +75,30 @@
       perspective: 1200px;
     }
 
-    /* Glass frame (iOS 26 style) */
     .glass-frame {
       position: absolute;
-      padding: 48px 64px;
+      padding: 48px 64px 56px;
       border-radius: 28px;
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(30px) saturate(160%);
       -webkit-backdrop-filter: blur(30px) saturate(160%);
       border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.45),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
       text-align: center;
-      transform-style: preserve-3d;
       animation: iosAppear 1.4s cubic-bezier(.2,.8,.2,1) forwards;
       opacity: 0;
     }
 
     @keyframes iosAppear {
-      0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.92);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(40px) scale(0.92); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     h1 {
       font-size: 2.8rem;
       font-weight: 800;
       letter-spacing: 0.08em;
-      text-shadow: 0 6px 30px rgba(0,0,0,0.6);
       margin-bottom: 16px;
-      animation: textAppear 1.6s cubic-bezier(.2,.8,.2,1);
     }
 
     h2 {
@@ -116,21 +106,39 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       opacity: 0.85;
-      animation: textAppear 1.9s cubic-bezier(.2,.8,.2,1);
+      margin-bottom: 28px;
     }
 
-    @keyframes textAppear {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Video frame iOS style */
+    .video-frame {
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 16/9;
+      margin: 0 auto;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(26px) saturate(170%);
+      -webkit-backdrop-filter: blur(26px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      overflow: hidden;
+      animation: iosAppear 1.8s cubic-bezier(.2,.8,.2,1) forwards;
     }
 
-    /* Subtle grain for horror vibe */
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     .grain {
       position: absolute;
       inset: 0;
@@ -150,6 +158,18 @@
     <div class="glass-frame" id="frame">
       <h1>FNAF MOVIE COMING SOON.</h1>
       <h2>ON THE CHANNEL LeoYT670</h2>
+
+      <!-- Video Frame -->
+      <div class="video-frame" id="videoFrame">
+        <div class="iframe-container">
+          <iframe
+            src="https://www.youtube.com/embed/LZxJ6avGJls?rel=0"
+            title="FNAF Movie Video"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
     </div>
   </div>
 
